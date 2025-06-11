@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Le site dont vous êtes le héros
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;800&family=Special+Elite&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body id="<?php echo $color; ?>">
+<main>
+    <section>
+        <h2><?php echo $choiceShortSentence; ?></h2>
+        <div>
+            <?php if (count($choices) > 0) { ?>
+                <form method="get" action="choices.php">
+                    <input type="hidden" name="eventNumber" value="<?php echo $eventNumber; ?>"/>
+                    <?php foreach($choices as $index => $choice) { ?>
+                        <div>
+                            <input type="radio" id="choice-<?php echo $index ;?>" name="choice" value="choice-<?php echo $index ;?>">
+                            <label for="choice-<?php echo $index ;?>"><?php echo $choice; ?></label>
+                        </div>
+                    <?php } ?>
+                    <div>
+                        <input type="submit" value="Valider le choix" />
+                    </div>
+                </form>
+            <?php } else { ?>
+                <a href="index.html">Retour à l'accueil</a>
+            <?php } ?>
+        </div>
+    </section>
+    <section>
+        <section>
+            <img src="assets/img/<?php echo $eventImage; ?>" />
+            <h1><?php echo $eventDescription; ?></h1>
+        </section>
+    </section>
+</main>
+<script type="application/javascript" src="assets/js/index.js"></script>
+</body>
+</html>

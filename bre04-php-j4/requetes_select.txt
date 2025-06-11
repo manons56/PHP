@@ -1,0 +1,239 @@
+SELECT
+
+
+exercice 1: 
+
+SELECT * FROM `users`
+
+
+
+
+exercice 2 :
+SELECT * FROM `users` WHERE id = 3
+
+
+
+exercice 3 :
+SELECT username FROM `users` WHERE id=2
+
+
+
+
+
+exercice 4 :
+SELECT * FROM `users` ORDER BY id DESC
+
+
+
+exercice 5 :
+
+SELECT * FROM `users` ORDER BY id DESC LIMIT 3
+
+
+INSERT 
+exercice 1:
+
+INSERT INTO `users`(username, email, job) VALUES ('Spiderman','peter.parker@daily-bugle.com','1')
+
+
+exercice 2 :
+INSERT INTO `jobs`(name) VALUES ('Lycéen')
+
+
+
+
+
+
+UPDATE
+
+exercice : 
+UPDATE `users` SET job = 5 WHERE users.username= "Spiderman"
+
+
+
+
+
+DELETE 
+
+exercice
+DELETE FROM `users` WHERE users.username = "Batman"
+
+
+
+
+JOIN 
+
+exercice 1
+
+SELECT users.email, jobs.name 
+FROM `users` JOIN `jobs`
+ON users.job = jobs.id
+WHERE users.username = "Spiderman"
+
+
+exercice 2
+
+SELECT users.* , jobs.name
+FROM `users` JOIN `jobs`
+ON users.job = jobs.id
+
+
+
+
+
+exercice 3
+SELECT users.email 
+FROM `jobs` JOIN `users`
+ON users.job = jobs.id
+WHERE jobs.name = "Journaliste"
+
+
+
+
+
+MINI PROJET :
+La liste de tous les utilisateurs ;
+SELECT * FROM `users`
+
+
+La liste de tous les utilisateurs rangée par noms de famille ;
+SELECT * FROM `users` ORDER BY last_name
+
+
+Le dernier utilisateur inscrit ;
+SELECT * FROM `users` ORDER BY registration_date LIMIT 1
+
+La liste de tous les utilisateurs fêtant leur anniversaire ce mois-ci ;
+SELECT * FROM users WHERE MONTH(birthdate) = MONTH(CURDATE())
+
+
+Le nombre total d'utilisateurs ;
+SELECT COUNT(users.id) FROM users
+
+
+La liste de tous les utilisateurs associés à leurs villes respectives ;
+
+SELECT users.*, addresses.city
+FROM users
+JOIN addresses
+    ON addresses.user_id = users.id;
+
+
+
+
+
+La liste de tous les utilisateurs vivant à une adresse sans numéro ;
+SELECT users.*
+FROM users
+JOIN addresses
+    ON addresses.user_id = users.id
+WHERE addresses.number IS NULL
+
+
+
+
+
+La liste de tous les produits dont le prix est supérieur à 1 000 € ;
+SELECT * FROM `products` WHERE products.price > 1000
+
+
+
+La liste de tous les produits associés à leurs photos respectives ;
+SELECT products.*, pictures.*
+FROM products
+JOIN pictures
+    ON products.id = pictures.product_id
+    
+    
+La liste de tous les produits appartenant à la catégorie « Voyage » ;
+SELECT products.*
+FROM products
+JOIN products_categories
+    ON products_categories.product_id = products.id
+JOIN categories
+    ON categories.id = products_categories.category_id
+WHERE categories.title = "Voyage"
+
+
+La liste de tous les utilisateurs ayant effectué plus de dix commandes ;
+SELECT users.*
+FROM users
+JOIN orders
+    ON orders.user_id = users.id
+GROUP BY users.id
+HAVING COUNT(orders.id) > 10;
+
+
+La liste de tous les produits achetés par le premier utilisateur inscrit.
+
+SELECT products.*
+FROM products
+JOIN products_orders
+    ON products_orders.product_id = products.id
+JOIN orders
+    ON orders.id = products_orders.order_id
+JOIN users
+    ON users.id = orders.user_id
+WHERE users.id = (
+  SELECT id
+  FROM users
+  ORDER BY users.registration_date ASC
+  LIMIT 1
+);
+
+
+
+
+Exercice : Des requêtes, encore des requêtes
+
+Requête 1
+Le nom, la description et le prix de chacun des produits.
+
+SELECT `name`, `description`, `price` FROM `products`
+
+
+
+Requête 2
+Le nom, la description et le prix de chacun des produits des produits de moins de 42€ du plus cher au moins cher.
+
+SELECT `name`, `description`, `price` FROM `products` where products.price < 42 ORDER BY products.price DESC
+
+
+
+Requête 3
+Le nom de la ville, le code postal, le numéro de rue et l'intitulé de la rue des adresses.
+
+SELECT `street`, `number`, `postal_code`, `city` FROM `addresses`
+
+
+
+Requête 4
+Le nom de la ville, le code postal, le numéro de rue et l'intitulé de la rue des adresses dont le nom de la ville commence par A.
+
+SELECT `street`, `number`, `postal_code`, `city` FROM `addresses` WHERE city LIKE 'A%'
+
+
+
+Requête 5
+La liste de tous les utilisateurs
+
+SELECT * FROM `users`
+
+
+Requête 6
+La liste de tous les utilisateurs rangée par date de naissance
+
+SELECT * FROM `users` ORDER BY users.birthdate
+
+
+Requête 7
+La liste de tous les utilisateurs rangée par date de naissance de plus de 5O ans
+
+SELECT * FROM `users` WHERE users.birthdate < DATE_SUB(CURDATE(), INTERVAL 50 YEAR) ORDER BY users.birthdate
+
+
+
+Requête 8
+La liste de tous les utilisateurs rangée par date de naissance, de plus de 5O ans et en ajoutant une colonne nommé "Age" pour afficher leur âge calculé actuel
+
+SELECT *, TIMESTAMPDIFF(YEAR, birthdate, CURDATE()) AS Age FROM `users` WHERE users.birthdate < DATE_SUB(CURDATE(), INTERVAL 50 YEAR) ORDER BY users.birthdate

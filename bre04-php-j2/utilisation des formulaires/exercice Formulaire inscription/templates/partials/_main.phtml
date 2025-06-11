@@ -1,0 +1,25 @@
+<main>
+    <h2>
+        <?= $pageTitle; ?>
+    </h2>
+    <!-- Votre formulaire ici -->
+    
+    <form method="post" action="controllers/user-form.php">
+        <label for="email">Adresse email :</label>
+        <input type="text" name="email" id="email"/>
+        <br/>
+         <label for="password">Mot de passe :</label>
+        <input type="text" name="password" id="password"  />
+        <br/>
+        <label for="confirm_password">Confirmation du mot de passe :</label>
+        <input type="text" name="confirmPassword" id="confirmPassword"/>
+        <br/>
+        <label for="subscription-newlsetter"> S'inscrire à la newsletter</label>
+        <input type="checkbox" name="newsletter" id="newsletter"/>
+        <br/>
+         <br/>
+        <button type="submit">S'inscrire</button>
+
+    </form> 
+</main>
+
