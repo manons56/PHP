@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Exercices Formulaires</title>
+        <link rel="stylesheet" href="assets/styles/style.css">
+    </head>
+    <body>
+       
+        <?php 
+        
+        echo $template;
+        
+        if ($template === 'home' || $template === null ){
+             require "home.phtml";
+        } elseif ($template === 'inscription') {
+            require "register.phtml";
+        }elseif ($template === 'connexion') {
+            require "login.phtml";
+        }
+        ?>
+    </body>
+</html>
