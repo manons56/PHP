@@ -2,11 +2,23 @@
 
 class User
 {
+    
     private ?int $id = null;
     private string $email;
     private string $firstName;
     private string $lastName;
-
+    
+    
+    public function __construct (string $email, string $firstName, string $lastName)
+    {
+        $this -> id = 0
+        $this -> email = $email;
+        $this -> first_name = $firstName;
+        $this -> last_name = $lastName;
+    }
+    
+    
+    
     
     public function getId(): ?int
     {
