@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Exercice Routeur MVC</title>
+	</head>
+	<body>
+	
+		<?php
+			if ($route === 'show_user') {
+				require 'templates/users/show.phtml';
+			} elseif ($route === 'create_user') {
+				require 'templates/users/create.phtml';
+			} elseif ($route === 'update_user') {
+                require 'templates/users/update.phtml';
+            } 
+			elseif ($route === 'list') {
+				require 'templates//users/list.phtml';
+			}
+		?>
+	</body>
+</html>
+
+
+
+    
+  
+
+    
+    
+  
+  
+    
+   
