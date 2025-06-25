@@ -5,16 +5,16 @@ class User
     
     private ?int $id = null;
     private string $email;
-    private string $firstName;
-    private string $lastName;
+    private string $first_name;
+    private string $last_name;
     
     
-    public function __construct (string $email, string $firstName, string $lastName)
+    public function __construct (string $email, string $first_name, string $last_name)
     {
-        $this -> id = 0
+        
         $this -> email = $email;
-        $this -> first_name = $firstName;
-        $this -> last_name = $lastName;
+        $this -> first_name = $first_name;
+        $this -> last_name = $last_name;
     }
     
     
@@ -51,13 +51,13 @@ class User
         $this->email = $email;
     }
 
-    public function setFirstName(string $firstName): void
+    public function setFirstName(string $first_name): void
     {
-        $this->first_name = $firstName;
+        $this->first_name = $first_name;
     }
 
-    public function setLastName(string $lastName): void
+    public function setLastName(string $last_name): void
     {
-        $this->last_name = $lastName;
+        $this->last_name = $last_name;
     }
 }
