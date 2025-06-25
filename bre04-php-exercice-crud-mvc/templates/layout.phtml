@@ -5,6 +5,13 @@
 		<title>Exercice Routeur MVC</title>
 	</head>
 	<body>
+		
+		<nav>
+		    <a href="index.php">Liste</a>
+		    <a href="index.php?route=show_user">Show</a> 
+		    <a href="index.php?route=create_user">Create</a> 
+		    <a href="index.php?route=update_user">Update</a>
+		</nav>
 	
 		<?php
 			if ($route === 'show_user') {
@@ -17,6 +24,7 @@
 			elseif ($route === 'list') {
 				require 'templates//users/list.phtml';
 			}
+			
 		?>
 	</body>
 </html>
