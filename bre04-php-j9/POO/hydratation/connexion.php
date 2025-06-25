@@ -2,7 +2,7 @@
 
 $host = "db.3wa.io";
 $port = "3306";
-$dbname = "manonsara_php_j7";
+$dbname = "manonsara_pooj1";
 $connexionString = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8";
 
 $user = "manonsara";

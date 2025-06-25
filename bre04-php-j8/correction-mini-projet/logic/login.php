@@ -23,7 +23,7 @@ if (isset($_POST["email"], $_POST["password"])) {
         if (!$passwordIsValid)
         {
             echo "<h1>Mot de passe incorrect</h1>";
-        } else { 
+        } else {
             $_SESSION["user"] = ["last_name" => $user["last_name"], "first_name" => $user["first_name"]];
             header("Location: ../index.php?route=home");
         }

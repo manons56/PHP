@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Exercice Routeur MVC</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<ul>
+					<li>
+						<a href="index.php">Accueil</a>
+					</li>
+					<li>
+						<a href="index.php?route=a-propos">À propos</a>
+					</li>
+					<li>
+                        <a href="index.php?route=contact">Contact</a>
+                    </li>
+                    <li>
+                        <a href="index.php?route=categorie&categorie=dev-back">Dev Back</a>
+                    </li>
+                    <li>
+                        <a href="index.php?route=categorie&categorie=dev-front">Dev Front</a>
+                    </li>
+                    <li>
+                        <a href="index.php?route=article&article=i-love-php">I love PHP</a>
+                    </li>
+                    <li>
+                        <a href="index.php?route=article&article=i-love-js">I love JS</a>
+                    </li>
+				</ul>
+			</nav>
+		</header>
+		<?php
+			if ($route === 'home') {
+				require 'templates/home.phtml';
+			} elseif ($route === 'about') {
+				require 'templates/about.phtml';
+			} elseif ($route === 'contact') {
+                require 'templates/contact.phtml';
+            } elseif ($route === 'category-dev-back') {
+                require 'templates/devBack.phtml';
+            } elseif ($route === 'category-dev-front') {
+                require 'templates/devFront.phtml';
+            } elseif ($route === 'article-js') {
+                require 'templates/loveJS.phtml';
+            } elseif ($route === 'article-php') {
+                require 'templates/lovePHP.phtml';
+            }
+			elseif ($route === 'notFound') {
+				require 'templates/notFound.phtml';
+			}
+		?>
+	</body>
+</html>
