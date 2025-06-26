@@ -19,6 +19,7 @@ abstract class AbstractManager
             $connexionString,
             $user,
             $password
+            );
               
         }
 }

@@ -33,7 +33,7 @@ class UserManager extends AbstractManager
     public function findOne(int $id){
     
     $query = $db->prepare('SELECT * FROM users WHERE id = :id');
-    $parameters = ['id' => $GET['id']
+    $parameters = ['id' => $_GET['id']
     ];
     $query->execute($parameters);
     $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -50,13 +50,13 @@ class UserManager extends AbstractManager
 
     
     public function create(User $user) : void{
-         $query = $this->db->prepare("
-            INSERT INTO users (email, first_name, last_name)
-            VALUES (:email, :first_name, :last_name)");
+        $query = $this->db->prepare("
+            INSERT INTO users (id, email, first_name, last_name)
+            VALUES (NULL, :email, :first_name, :last_name)");
          $parameters = [
-                 'email' => $GET['email'],
-                 'first_name' => $GET ['first_name'],
-                 'last_name' => $GET ['last_name'],
+                 'email' => $_POST['email'],
+                 'first_name' => $_POST ['first_name'],
+                 'last_name' => $_POST ['last_name'],
              ];
         $query->execute($parameters);
     }
@@ -72,10 +72,10 @@ class UserManager extends AbstractManager
                 WHERE id = :id
             ");
              $parameters = [
-                 'id' => $GET['id'],
-                 'email' => $GET['email'],
-                 'first_name' => $GET ['first_name'],
-                 'last_name' => $GET ['last_name'],
+                 'id' => $_GET['id'],
+                 'email' => $_GET['email'],
+                 'first_name' => $_GET ['first_name'],
+                 'last_name' => $_GET ['last_name'],
              ];
             $query->execute($parameters);
         }
@@ -85,7 +85,7 @@ class UserManager extends AbstractManager
     
     public function delete(int $id){
         $query = $this->db->prepare("DELETE FROM users WHERE id = :id");
-        $parameters = ['id' => $GET['id']
+        $parameters = ['id' => $_GET['id']
          ];
         $query->execute($parameters);
         }
