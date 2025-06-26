@@ -1,0 +1,26 @@
+s'il y a plus de méthodes que de templates, c'est parce que les templates ce sont les pages qui vont être affichées, hors les deux méthodes check et la méthode delete ce sont des actions qui ne demandent pas d'affichage, elles effectuent une action non visible par l'utilisateur
+
+
+
+pour simplifier les tests, j'ai ajouté une liste comme hier dans le layout pour avoir accès plus facilement aux différentes pages et vérifier que ca affiche la bonne chose sans devoir toucher manuellement à l'url
+
+
+
+Méthode du UserController	Action attendue
+list()	                    Afficher tous les utilisateurs
+show()	                    Afficher un utilisateur (par ID)
+create()	                Afficher le formulaire de création
+checkCreate()	            Traiter et insérer un nouvel utilisateur
+update()	                Afficher le formulaire de modification d’un utilisateur
+checkUpdate()	            Traiter et enregistrer les modifications
+delete()                	Supprimer un utilisateur``
+
+
+UserController	    Appelle UserManager → Pourquoi ?
+list()	            findAll() → pour récupérer tous les utilisateurs
+show()          	findOneById($id) → pour afficher un utilisateur précis
+create()	        Aucun appel ici (juste afficher un formulaire)
+checkCreate()	    insert($user) → pour insérer le nouvel utilisateur
+update()	        findOneById($id) → pour préremplir le formulaire
+checkUpdate()	    update($user) → pour enregistrer les changements
+delete()	        delete($id) → pour supprimer un utilisateur
