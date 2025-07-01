@@ -8,7 +8,10 @@
 class UserManager extends AbstractManager
 {
 
-
+             public function __construct()
+                {
+                    parent::__construct();
+                }
 
            // findByEmail(string $email) qui retourne le user qui a l'email passé en paramètre, null si il n'existe pas
 

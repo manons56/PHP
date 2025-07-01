@@ -10,7 +10,10 @@ class PostManager extends AbstractManager
 {
 
 
-
+             public function __construct()
+                    {
+                        parent::__construct();
+                    }
 
 
 

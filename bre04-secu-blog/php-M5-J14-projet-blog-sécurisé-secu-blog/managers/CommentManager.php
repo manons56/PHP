@@ -7,45 +7,76 @@
 
 class CommentManager extends AbstractManager
 {
-
-}
-
-
-
-
-// CommentManager﻿
-findByPost(int $postId) qui retourne les commentaires ayant le post dont l'id est passé en paramètre
-
-
-
-       // findByPost(int $postId) qui retourne sous forme de tableau associatif les informations des catégories liées au post qui à l'id passé en paramètre
+    
+         public function __construct()
+            {
+                parent::__construct();
+            }
             
-           public function findByPost(int $postId): array
+            
+
+            // findByPost(int $postId) qui retourne les commentaires ayant le post dont l'id est passé en paramètre
+
+            public function findByPost(int $postId): array
                 {
-                    $query = $this->db->prepare('
-                        SELECT * FROM categories
-                        JOIN posts_categories ON categories.id = posts_categories.category_id
-                        WHERE posts_categories.post_id = :postId
-                    ');
+                    $userManager = new UserManager();
+                    $postManager = new PostManager();
                 
-                    $parameters = ['postId' => $postId];
+                    $query = $this->db->prepare("SELECT * FROM comments WHERE post_id = :post_id");
+                
+                    $parameters = [
+                        "post_id" => $postId
+                    ];
+                
                     $query->execute($parameters);
+                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
                 
-                    $resultat = $query->fetchAll(PDO::FETCH_ASSOC);
-                    $categories = [];
+                    $comments = [];
                 
-                    foreach ($resultat as $item) {
-                        $category = new Category($item["title"], $item["description"]);
-                        $category->setId($item["id"]);
-                        $categories[] = $category;
+                    foreach ($results as $result) {
+                        $user = $userManager->findOne($result["user_id"]);
+                        $post = $postManager->findOne($result["post_id"]);
+                
+                        $comment = new Comment($result["content"], $user, $post);
+                        $comment->setId($result["id"]);
+                
+                        $comments[] = $comment;
                     }
                 
-                    return $categories;
+                    return $comments;
                 }
 
 
 
 
 
-create(Comment $comment) qui insère le commentaire passé en paramètres dans la base de données
 
+                // create(Comment $comment) qui insère le commentaire passé en paramètres dans la base de données
+
+
+                public function create(Comment $comment): void
+                {
+                    
+                    $query = $this->db->prepare("
+                        INSERT INTO comments (content, user_id, post_id)
+                        VALUES (:content, :user_id, :post_id)
+                    ");
+                
+                    $parameters = [
+                        "content"   => $comment->getContent(),
+                        "user_id"   => $comment->getUser()-> getId(),
+                        "post_id"   => $comment->getPost() -> getId(),
+                        
+                    ];
+                
+                    $query->execute($parameters);
+                    $comment->setId($this->db->lastInsertId());
+                  
+                }
+                
+                
+                
+    
+}            
+                
+        
