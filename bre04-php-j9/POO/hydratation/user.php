@@ -2,7 +2,7 @@
 
 class User
 {
-    private int $id;
+    private int $id = null;
     private string $firstName;
     private string $lastName;
     private string $email;
@@ -10,7 +10,7 @@ class User
     
      public function __construct(string $firstName,string $lastName, string $email)
     {
-        $this->id = 0; 
+  
         $this->firstName = $firstName;  
         $this->lastName = $lastName;
         $this->email = $email;

@@ -1,0 +1,58 @@
+  
+  
+  
+  
+  
+  
+  
+    public function findOne(int $id) : ? Post
+    {
+        $um = new UserManager();
+        // fait appel à la class UserManager du fichier UserManager.php
+        
+        
+        $cm = new CategoryManager();
+          // fait appel à la class CategoryManager du fichier CategoryManager.php
+
+
+        $query = $this->db->prepare('SELECT * FROM posts WHERE id=:id');
+        //on demande à la base de données de tout sélectionner dans la table posts là où id vaut :id.
+
+        $parameters = [
+            "id" => $id
+        ];
+       // tableau qui lie le paramètre :id de la requête SQL à la valeur de la variable $id passée en argument à la fonction.
+
+        $query->execute($parameters);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($result) //On vérifie si la requête a trouvé un post avec cet id (si $result n’est pas vide).
+        {
+            $categories = $cm->findByPost($result["id"]);
+            // On utilise $cm pour récupérer toutes les catégories associées à ce post (via findByPost).
+            $user = $um->findOne($result["author"]);
+            //on utilise $um pour récupérer les informations de l’auteur du post ($result["author"] est l'id de l’auteur)
+            $post = new Post($result["title"], $result["excerpt"], $result["content"], $user, DateTime::createFromFormat('Y-m-d H:i:s', $result["created_at"]));
+           // on créé un nouvel objet Post avec le titre ($result["title"]), l’extrait ($result["excerpt"]), le contenu ($result["content"]), l’auteur (l’objet $user récupéré juste avant), la date de création 
+            $post->setId($result["id"]);
+            //On assigne l’id du post à l’objet $post.
+            $post->setCategories($categories);
+            //On assigne les catégories récupérées à l’objet $post.
+
+
+            return $post;
+            //On retourne l’objet Post 
+        }
+
+        return null;
+        //Si aucun post n’a été trouvé, on retourne null.
+
+
+    }
+    
+    
+    
+    
+    $post = new Post($result["title"], $result["excerpt"], $result["content"], $user, DateTime::createFromFormat('Y-m-d H:i:s', $result["created_at"]), $categories);
+    $post->setId($result["id"]);
+    return $post;
