@@ -17,7 +17,7 @@ class PostManager extends AbstractManager
 
 
 
-// PostManager﻿
+
             // findLatest() qui retourne les 4 derniers posts
                  public function findLatest() : array
                             {
@@ -88,8 +88,50 @@ class PostManager extends AbstractManager
             }
                  
 
-findByCategory(int $categoryId) qui retourne les posts ayant la catégorie dont l'id est passé en paramètre
-
+            // findByCategory(int $categoryId) qui retourne les posts ayant la catégorie dont l'id est passé en paramètre
+            
+             public function findByCategory(int $categoryId): array
+                {
+                    $userManager = new UserManager();
+                    $categoryManager = new CategoryManager();
+                
+                    
+                    $query = $this->db->prepare(
+                        "SELECT * FROM posts
+                         JOIN post_category ON posts.id = post_category.post_id
+                         WHERE post_category.category_id = :category_id"
+                    );
+                
+                    $parameters = [
+                        "category_id" => $categoryId
+                    ];
+                
+                    $query->execute($parameters);
+                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                
+                    $posts = [];
+                
+                    foreach ($results as $result) {
+                        $user = $userManager->findOne($result["author"]);
+                        $categories = $categoryManager->findByPost($result["id"]);
+                
+                       
+                        $post = new Post(
+                            $result["title"],
+                            $result["excerpt"],
+                            $result["content"],
+                            $user,
+                            DateTime::createFromFormat('Y-m-d H:i:s', $result["created_at"]),
+                            $categories
+                        );
+                
+                        $post->setId($result["id"]);
+                        $posts[] = $post;
+                    }
+                
+                    return $posts;
+                }
+            
 
 
 }
