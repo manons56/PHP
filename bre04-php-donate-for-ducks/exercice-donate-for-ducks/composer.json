@@ -1,0 +1,18 @@
+{
+    "name": "manonsara/exercice-donate-for-ducks",
+    "autoload": {
+        "psr-4": {
+            "Manonsara\\ExerciceDonateForDucks\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "manons56",
+            "email": "manon.sara@3wa.io"
+        }
+    ],
+    "require": {
+        "stripe/stripe-php": "17.4",
+        "vlucas/phpdotenv": "5.6"
+    }
+}

@@ -1,0 +1,54 @@
+h2{
+    color : $color-yellow;
+    text-transform : uppercase;
+    text-align:center;
+    
+}
+
+
+h3{
+    color : $color-yellow;
+    text-transform : uppercase;
+}
+
+
+
+button {
+    text-transform : uppercase;
+    color : $color-yellow;
+    border : 1px solid $color-yellow;
+    border-radius :5px;
+    background-color : $color-blue;
+    padding:0.5em;
+    
+}
+
+p {
+    color: $color-white;
+}
+
+article img {
+    width:15em;
+}
+
+
+
+nav ul {
+    display :flex;
+    justify-content: space-evenly;
+}
+
+
+main ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem; 
+}
+
+
+main article {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  text-align: center; 
+}

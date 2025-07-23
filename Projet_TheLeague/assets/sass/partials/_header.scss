@@ -1,0 +1,19 @@
+h1 {
+    color : $color-white;
+    text-transform : uppercase;
+    text-align:center;
+}
+
+nav  {
+    text-transform : uppercase;
+    color: $color-white;
+}
+
+ul{
+    list-style:none;
+}
+
+li a{
+    text-decoration :none;
+    color : $color-white;
+}

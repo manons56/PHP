@@ -1,0 +1,9 @@
+@import "vars/_fonts";
+@import "vars/_colors";
+@import "layouts/_homepage";
+@import "partials/_header";
+
+
+body {
+    background-color : $color-blue ;
+}
