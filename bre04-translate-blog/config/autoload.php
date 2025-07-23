@@ -2,10 +2,15 @@
 
 //MODELS
 
+require "models/categories.php";
+require "models/posts.php";
+
 
 
 //MANAGERS
-
+require "managers/AbstractManager.php";
+require "managers/CategoryManager.php";
+require "managers/PostsManager.php";
 
 
 
